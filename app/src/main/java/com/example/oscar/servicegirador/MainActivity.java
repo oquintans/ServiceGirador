@@ -24,13 +24,12 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     Intent intent = new Intent(ct, GiroService.class);
-                    startService(intent);
                     Toast.makeText(ct, "Activado", Toast.LENGTH_SHORT).show();
-
+                    startService(intent);
                 } else {
                     Intent intent = new Intent(ct, GiroService.class);
-                    stopService(intent);
                     Toast.makeText(ct, "Desactivado", Toast.LENGTH_SHORT).show();
+                    stopService(intent);
                 }
             }
         });

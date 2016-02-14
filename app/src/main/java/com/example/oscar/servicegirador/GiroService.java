@@ -22,15 +22,21 @@ public class GiroService extends Service {
     }
 
     @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        if (Configuration.ORIENTATION_LANDSCAPE == newConfig.orientation) {
+            createIntentResult("HORIZONTAL");
+        } else if (Configuration.ORIENTATION_PORTRAIT == newConfig.orientation) {
+            createIntentResult("VERTICAL");
+        }
+
+    }
+
+    @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.i(TAG, "Service onStartCommand");
 
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            createIntentResult("LANDSCAPE");
-        } else {
-            createIntentResult("VERTICAL");
-        }
-        Log.i(TAG, "Service running");
 
         return Service.START_STICKY;
     }
@@ -47,11 +53,11 @@ public class GiroService extends Service {
         return null;
     }
 
-    public void createIntentResult(String o) {
+    public void createIntentResult(String or) {
         Intent intent = new Intent(this, ResultServiceActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        intent.putExtra("orientation", o);
+        intent.putExtra("orientation", or);
         startActivity(intent);
     }
 }
