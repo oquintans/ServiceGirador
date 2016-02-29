@@ -15,7 +15,7 @@ public class ResultServiceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_service);
         Intent intent = getIntent();
-        String msg = intent.getStringExtra("orientation");
+        String msg = "Oido Cocina";
         TextView textView = (TextView) findViewById(R.id.textGiro);
         textView.setText(msg);
         //setContentView(textView);
